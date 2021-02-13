@@ -8,20 +8,18 @@ class PlayerInputHandler {
         PlayerInputHandler();
         ~PlayerInputHandler();
         void handleEvent(sf::Event event);
-        void updateTime(float dt);
+        void update(float dt);
         
     private:
         void playerJump();
         void movePlayer();
         void handleCharge(float dt);
         float jumpCounter;
-        float jumpDelay = 1;
         bool isMovingRight;
         bool isMovingLeft;
 
         bool isCharging = false;
         float charge = 0;
-
 
         Player* player;
 

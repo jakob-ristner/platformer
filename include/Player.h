@@ -25,4 +25,6 @@ class Player: public Body {
         float speed = 8;
         float charge = 0;
         bool contact = false;
+        int collisions = 0;
+
 };

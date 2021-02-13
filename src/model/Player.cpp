@@ -39,9 +39,13 @@ float Player::getCharge() {
 }
 
 void Player::setContact(bool contact) {
-    this->contact = contact;
+    if (contact) {
+        collisions++;
+    } else {
+        collisions--;
+    }
 }
 
 bool Player::getContact() {
-    return contact;
+    return collisions > 0;
 }

@@ -63,23 +63,34 @@ void PlayerInputHandler::handleEvent(sf::Event event) {
 
 }
 
-void PlayerInputHandler::updateTime(float dt) {
+void PlayerInputHandler::update(float dt) {
     jumpCounter += dt;
     movePlayer();
+    if (player->getContact() && player->getBody()->GetLinearVelocity().y == 0) {
+        player->onGround = true;
+    } else { 
+        player->onGround = false;
+    }
+    if (player->getContact()) {
+        if (player->getBody()->GetLinearVelocity().x < 0) {
+            player->getBody()->ApplyLinearImpulseToCenter(b2Vec2(2, 0), true);
+        } else if (player->getBody()->GetLinearVelocity().x > 0) {
+            player->getBody()->ApplyLinearImpulseToCenter(b2Vec2(-2, 0), true);
+        }
+    }
     handleCharge(dt);
 }
 
 void PlayerInputHandler::playerJump() {
     float playerVelx = player->getBody()->GetLinearVelocity().x;
     float playerVely = player->getBody()->GetLinearVelocity().y;
-    if (jumpCounter >= jumpDelay && player->onGround) {
+    if (player->onGround) {
         player->getBody()->SetLinearVelocity(b2Vec2(playerVelx, -player->getJump()));
         jumpCounter = 0;
     }
 }
 
 void PlayerInputHandler::movePlayer() {
-
     float playerVelx = player->getBody()->GetLinearVelocity().x;
 
     if (playerVelx > -player->getSpeed() && isMovingLeft) {

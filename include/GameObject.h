@@ -5,6 +5,5 @@ class GameObject {
         GameObject(std::string type);
         GameObject();
         ~GameObject();
-        std::string type = "";
-        bool checkType(std::string otype);
+        std::string type;
 };

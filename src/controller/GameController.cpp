@@ -20,9 +20,9 @@ void GameController::run() {
     while (running) {
         dt = clock.restart().asMilliseconds() / 1000.0f;
 
-        playerHandler.updateTime(dt);
+        playerHandler.update(dt);
 
-        handlePlayerFric();
+        //handlePlayerFric();
         handleInput();;
 
         world.Step(dt, velocityiIt, posIt);
