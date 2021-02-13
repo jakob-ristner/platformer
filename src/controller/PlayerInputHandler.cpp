@@ -33,6 +33,10 @@ void PlayerInputHandler::handleEvent(sf::Event event) {
                 isMovingRight = true;
                 isMovingLeft = false;
                 break;
+
+            case sf::Keyboard::Key::Space:
+                isCharging = true;
+                break;
                 
             default:
                 break;
@@ -45,6 +49,12 @@ void PlayerInputHandler::handleEvent(sf::Event event) {
             
             case sf::Keyboard::D:
                 isMovingRight = false;
+                break;
+
+            case sf::Keyboard::Key::Space:
+                isCharging = false;
+                charge = 0;
+                break;
          
             default:
                 break;
@@ -56,6 +66,7 @@ void PlayerInputHandler::handleEvent(sf::Event event) {
 void PlayerInputHandler::updateTime(float dt) {
     jumpCounter += dt;
     movePlayer();
+    handleCharge(dt);
 }
 
 void PlayerInputHandler::playerJump() {
@@ -77,4 +88,12 @@ void PlayerInputHandler::movePlayer() {
     } else if (playerVelx < player->getSpeed() && isMovingRight) {
         player->getBody()->ApplyLinearImpulseToCenter(right, true);
     }
+}
+
+
+void PlayerInputHandler::handleCharge(float dt) {
+    if (isCharging) {
+        charge += dt;
+    }
+    player->setCharge(charge);
 }

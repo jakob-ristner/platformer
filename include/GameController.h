@@ -5,6 +5,7 @@
 #include "../lib/Box2D.h"
 #include <SFML/Graphics.hpp>
 #include "PlayerInputHandler.h"
+#include "PlayerContactListener.cpp"
 
 class GameController {
     public:
@@ -21,9 +22,10 @@ class GameController {
         void initDynBody(Body* body);
         void initStatBody(Body* body);
 
+        void handlePlayerFric(); 
+
         //Input
-        void handlePlayerInput(float dt);
-        void handlePlayerFric();
+        void handleInput();
 
         bool running;
         GameView view;
@@ -39,9 +41,16 @@ class GameController {
         sf::Event event;
         float dt;
 
+        char playerData;
+        char platformData;
+        void beginPlayerContact();
+        void endPlayerContact();
+        bool playerCol = false;
+        PlayerContactListener clistener;
+
         static const int velocityiIt = 6;
         static const int posIt = 2;
-        static const int g = 15;
+        static const int g = 30;
 
         b2Vec2 gravity = b2Vec2(0.0f, g);
         b2World world = b2World(gravity);

@@ -19,9 +19,20 @@ class GameView {
         bool poll(sf::Event event);
         sf::RenderWindow* getWindow();
     private:
-        static const int windowWidth = 2560;
-        static const int windowHeight = 1440;
+        static const int windowWidth = 1920;
+        static const int windowHeight = 1080;
         static const int worldScale = 20;
+
+        //charge bar TODO could be moved to playerview
+        static const int chargeBarWidth = 400;
+        int chargeBarHeight = 20;
+        static const int chargeBarY = 900;
+        static const int chargeBw = 6;
+        sf::RectangleShape chargeBarBorder;
+        sf::RectangleShape chargeBarBackground;
+        sf::RectangleShape chargeBarFill;
+        void initChargeBar();
+        void updateChargeBar();
 
         ModelInterface* model;
 
@@ -50,3 +61,4 @@ class GameView {
         void drawPlatforms();
         std::vector<sf::RectangleShape> platforms;
 };
+

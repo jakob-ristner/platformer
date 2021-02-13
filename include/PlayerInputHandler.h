@@ -13,10 +13,14 @@ class PlayerInputHandler {
     private:
         void playerJump();
         void movePlayer();
+        void handleCharge(float dt);
         float jumpCounter;
         float jumpDelay = 1;
         bool isMovingRight;
         bool isMovingLeft;
+
+        bool isCharging = false;
+        float charge = 0;
 
 
         Player* player;

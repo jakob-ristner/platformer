@@ -7,21 +7,24 @@ GameView::GameView():
 {
     window.setFramerateLimit(60);
     bgFill.setSize(sf::Vector2f(windowWidth, windowHeight));
-    bgFill.setFillColor(sf::Color(28, 28, 28));
+    bgFill.setFillColor(sf::Color(29, 32, 38));
 
 }
 
 void GameView::initPlayer() {
     playerShape = sf::RectangleShape(getSize(model->getPlayer()));
-    playerShape.setFillColor(sf::Color::Red);
+    playerShape.setFillColor(sf::Color(224, 108, 117));
     playerShape.setOrigin(getOrigin(model->getPlayer()));
     drawables.push_back(&playerShape);
+
+    initChargeBar();
 }
 
 GameView::~GameView() {}
 
 void GameView::update() {
     updatePlayerPos();
+    updateChargeBar();
     draw();
 }
 
@@ -31,6 +34,14 @@ void GameView::draw() {
     for (auto element : drawables) {
         window.draw(*element);
     }
+
+    //testing contact listener
+    if (model->getPlayer()->getContact()) {
+        playerShape.setFillColor(sf::Color::Black);
+    } else {
+        playerShape.setFillColor(sf::Color(224, 108, 117));
+    }
+
     drawPlatforms();
     window.display();
 }
@@ -69,7 +80,7 @@ void GameView::updatePlatforms() {
     for (int i = 0; i < model->getPlatforms()->size(); i++) {
         Body plat = model->getPlatforms()->at(i);
         platforms.push_back(sf::RectangleShape(getSize(&plat)));
-        platforms.at(i).setFillColor(sf::Color::Blue);
+        platforms.at(i).setFillColor(sf::Color(229, 192, 123));
         platforms.at(i).setPosition(getPos(&plat));
         platforms.at(i).setOrigin(getOrigin(&plat));
 
@@ -111,6 +122,42 @@ sf::Vector2f GameView::getPos(Body* body) {
 
     return sf::Vector2f(x, y);
 }
+
+void GameView::initChargeBar() {
+    chargeBarBorder.setSize(sf::Vector2f(chargeBarWidth + chargeBw, chargeBarHeight + chargeBw));
+    chargeBarBorder.setPosition(
+            sf::Vector2f((int) (windowWidth - chargeBarWidth - chargeBw) / 2, chargeBarY - chargeBw / 2));
+    chargeBarBorder.setFillColor(sf::Color::White);
+
+    chargeBarBackground.setSize(sf::Vector2f(chargeBarWidth, chargeBarHeight));
+    chargeBarBackground.setPosition(sf::Vector2f((int) (windowWidth - chargeBarWidth) / 2, chargeBarY));
+    chargeBarBackground.setFillColor(sf::Color(29, 32, 38));
+
+    chargeBarFill.setSize(sf::Vector2f(0, chargeBarHeight));
+    chargeBarFill.setPosition(sf::Vector2f((int) (windowWidth - chargeBarWidth) / 2, chargeBarY));
+    chargeBarFill.setFillColor(sf::Color(8, 195, 121));
+
+    drawables.push_back(&chargeBarBorder);
+    drawables.push_back(&chargeBarBackground);
+    drawables.push_back(&chargeBarFill);
+}
+
+void GameView::updateChargeBar() {
+
+    if (model->getPlayer()->getCharge() == 0) {
+       chargeBarBorder.setSize(sf::Vector2f());
+       chargeBarBackground.setSize(sf::Vector2f());
+       chargeBarFill.setSize(sf::Vector2f());
+    } else {
+        initChargeBar();
+    }
+
+    int playerCharge = model->getPlayer()->getCharge() * chargeBarWidth;
+    int cw = chargeBarWidth;
+    int fillWidth = std::min(playerCharge, cw);
+    chargeBarFill.setSize(sf::Vector2f(fillWidth, chargeBarHeight));
+}
+
 
 
 

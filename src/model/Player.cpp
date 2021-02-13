@@ -6,10 +6,7 @@ Player::Player() {
     height = 2;
     density = 1;
     friction = 0;
-
-    jump = 15;
-    acc = 4;
-    speed = 8;
+   
     shape.SetAsBox(width, height);
 
     startX = 0;
@@ -32,4 +29,18 @@ float Player::getAcc() {
     return acc;
 }
 
+void Player::setCharge(float charge) {
+    this->charge = charge;
+}
 
+float Player::getCharge() {
+    return charge;
+}
+
+void Player::setContact(bool contact) {
+    this->contact = contact;
+}
+
+bool Player::getContact() {
+    return contact;
+}

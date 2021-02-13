@@ -21,9 +21,14 @@ void GameController::run() {
     init();
     while (running) {
         dt = clock.restart().asMilliseconds() / 1000.0f;
-        handlePlayerInput(dt);
+
+        playerHandler.updateTime(dt);
+
         handlePlayerFric();
+        handleInput();;
+
         world.Step(dt, velocityiIt, posIt);
+    
         updateView();
     }
 }
@@ -35,7 +40,8 @@ void GameController::init() {
     playerHandler = PlayerInputHandler(model.getPlayer());
     initDynBody(player);
     player->getBody()->SetFixedRotation(true);
-    
+    player->getBody()->SetUserData(player);
+
     for (int i = 0; i < model.getPlatforms()->size(); i++) {
         initStatBody(&(model.getPlatforms()->at(i)));   
     }
@@ -43,12 +49,19 @@ void GameController::init() {
     view.setModel(&model);
     view.initPlayer();
     view.updatePlatforms();
+
+    world.SetContactListener(&clistener);
+    
 }
 
-void GameController::handlePlayerInput(float dt) { //TODO add serperate playerctl
-    playerHandler.updateTime(dt);
+void GameController::handleInput() {
+    // can be used to call seperate methods instead
     while (view.getWindow()->pollEvent(event)) {
-        playerHandler.handleEvent(event);
+
+        if (event.type == sf::Event::Closed || event.key.code == sf::Keyboard::Q)
+            running = false; // just closing
+
+        playerHandler.handleEvent(event); // player input
     }
 }
 
@@ -72,7 +85,6 @@ void GameController::handlePlayerFric() {
         }
     }
 }
-
 
 void GameController::initDynBody(Body* body) {
     b2BodyDef bodyDef;
@@ -104,6 +116,8 @@ void GameController::initStatBody(Body* body) {
     body->setBody(b2body);
     body->getBody()->CreateFixture(&fixDef);
 }
+
+//TODO move to playerctl
 
 
 

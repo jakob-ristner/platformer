@@ -1,15 +1,14 @@
 #include "ModelInterface.h"
+#include <iostream>
 #include "Platform.h"
 
 ModelInterface::ModelInterface() {
     player = Player();
-    platforms.push_back(Platform(10, 0.4, 11, 7));
-    platforms.push_back(Platform(10, 0.4, 6, 0));
-    platforms.push_back(Platform(8, 0.4, 18, 12));
-    platforms.push_back(Platform(8, 0.4, -2, 15));
-    platforms.push_back(Platform(7, 0.1, -10, 20));
-    platforms.push_back(Platform(50, 0.4, -5, 25));
-
+    //platforms.push_back(Platform(width, height, x, y));
+    platforms.push_back(Platform(10, 0.4, -15, 10));
+    platforms.push_back(Platform(10, 0.4, -30, 15));
+    platforms.push_back(Platform(10, 0.4, 18, 12));
+    platforms.push_back(Platform(10, 0.4, -2, 15));
 }
 
 ModelInterface::~ModelInterface() {}
@@ -29,3 +28,4 @@ float ModelInterface::getPlayerY() {
 std::vector<Body>* ModelInterface::getPlatforms() {
     return &platforms;
 }
+

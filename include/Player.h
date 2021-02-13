@@ -8,13 +8,21 @@ class Player: public Body {
         ~Player();
 
         int getJump();
+        int getAttCharge();
         float getSpeed();
         float getAcc();
+        void setCharge(float charge);
+        float getCharge();
+        
+        void setContact(bool contact);
+        bool getContact();
 
-        bool onGround = true;
+        bool onGround = false;
+
     private:
-        int jump;
-        float acc; 
-        float speed;
-
+        int jump = 20;
+        float acc = 8; 
+        float speed = 8;
+        float charge = 0;
+        bool contact = false;
 };
