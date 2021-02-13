@@ -6,6 +6,7 @@ Player::Player() {
     height = 2;
     density = 1;
     friction = 0;
+    type = "player";
    
     shape.SetAsBox(width, height);
 

@@ -3,13 +3,11 @@
 #include "PlayerInputHandler.h"
 
 GameController::GameController() {
-
 }
 
 GameController::~GameController() {}
 
 void GameController::updateModel(float dt) {
-
 }
 
 void GameController::updateView() {
@@ -40,7 +38,9 @@ void GameController::init() {
     playerHandler = PlayerInputHandler(model.getPlayer());
     initDynBody(player);
     player->getBody()->SetFixedRotation(true);
+
     player->getBody()->SetUserData(player);
+
 
     for (int i = 0; i < model.getPlatforms()->size(); i++) {
         initStatBody(&(model.getPlatforms()->at(i)));   
@@ -91,6 +91,8 @@ void GameController::initDynBody(Body* body) {
     bodyDef.position.Set(body->getStartX(), body->getStartY());
     bodyDef.type = b2_dynamicBody;
     b2Body* b2body = world.CreateBody(&bodyDef);
+
+
 
     b2FixtureDef fixDef;
 

@@ -6,6 +6,7 @@ Platform::Platform(float width, float height, float x, float y) {
 
     startX = x;
     startY = y;
+    type = "platform";
 
     friction = 0;
     shape.SetAsBox(width, height);

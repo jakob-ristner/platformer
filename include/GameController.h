@@ -41,8 +41,6 @@ class GameController {
         sf::Event event;
         float dt;
 
-        char playerData;
-        char platformData;
         void beginPlayerContact();
         void endPlayerContact();
         bool playerCol = false;

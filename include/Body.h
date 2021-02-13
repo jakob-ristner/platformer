@@ -1,7 +1,8 @@
 #pragma once
 #include "Box2D.h"
+#include "GameObject.h"
 
-class Body {
+class Body : public GameObject {
     public:
         b2Body* getBody();
         b2Shape* getShape();
