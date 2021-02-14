@@ -25,6 +25,7 @@ GameView::~GameView() {}
 
 void GameView::update() {
     updatePlayerPos();
+    updatePlatforms();
     updateChargeBar();
     draw();
 }
@@ -117,6 +118,13 @@ sf::Vector2f GameView::getPos(Body* body) {
 
     x += windowWidth / 2;
     y += windowHeight / 2;
+    
+    //player camera offset
+    float offsetX = -(model->getPlayer()->getX() * worldScale);
+    float offsetY = -(model->getPlayer()->getY() * worldScale);
+    
+    x += offsetX;
+    y += offsetY;
 
     return sf::Vector2f(x, y);
 }
