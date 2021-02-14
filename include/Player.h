@@ -14,8 +14,9 @@ class Player: public Body {
         void setCharge(float charge);
         float getCharge();
         
-        void setContact(bool contact);
         bool getContact();
+        void collide();
+        void unCollide();
 
         bool onGround = false;
 

@@ -20,7 +20,6 @@ float Body::getStartY() {
     return startY;
 }
 
-
 float Body::getX() {
     return body->GetPosition().x;
 }
@@ -43,4 +42,10 @@ float Body::getDensity() {
 
 float Body::getFriction() {
     return friction;
+}
+
+void Body::setCollision(bool coll) {
+    for (b2Fixture* fix = body->GetFixtureList(); fix; fix = fix->GetNext()) { 
+        fix->SetSensor(!coll);
+    }
 }

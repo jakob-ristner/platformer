@@ -7,7 +7,8 @@ class Body : public GameObject {
         b2Body* getBody();
         b2Shape* getShape();
         void setBody(b2Body*);
-        
+
+        void setCollision(bool coll);
 
         float getX();
         float getY();

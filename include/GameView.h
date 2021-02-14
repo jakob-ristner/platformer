@@ -16,8 +16,7 @@ class GameView {
         void updatePlatforms();
         void initPlayer();
 
-        bool poll(sf::Event event);
-        sf::RenderWindow* getWindow();
+        bool poll(sf::Event &event);
     private:
         static const int windowWidth = 1920;
         static const int windowHeight = 1080;

@@ -12,6 +12,7 @@ GameView::GameView():
 }
 
 void GameView::initPlayer() {
+    window.setKeyRepeatEnabled(false);
     playerShape = sf::RectangleShape(getSize(model->getPlayer()));
     playerShape.setFillColor(sf::Color(224, 108, 117));
     playerShape.setOrigin(getOrigin(model->getPlayer()));
@@ -37,7 +38,7 @@ void GameView::draw() {
 
     //testing contact listener
     if (model->getPlayer()->getContact()) {
-        playerShape.setFillColor(sf::Color::Black);
+        playerShape.setFillColor(sf::Color(97, 175, 239));
     } else {
         playerShape.setFillColor(sf::Color(224, 108, 117));
     }
@@ -46,13 +47,10 @@ void GameView::draw() {
     window.display();
 }
 
-bool GameView::poll(sf::Event event) {
+bool GameView::poll(sf::Event &event) {
     return window.pollEvent(event);
 }
 
-sf::RenderWindow* GameView::getWindow() {
-    return &window;
-}
 
 void GameView::setModel(ModelInterface* model) {
     this->model = model;

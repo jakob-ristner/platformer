@@ -9,8 +9,6 @@ ModelInterface::ModelInterface() {
     platforms.push_back(Platform(10, 0.4, -30, 15));
     platforms.push_back(Platform(10, 0.4, 18, 12));
     platforms.push_back(Platform(10, 0.4, -2, 15));
-
-
 }
 
 ModelInterface::~ModelInterface() {}
