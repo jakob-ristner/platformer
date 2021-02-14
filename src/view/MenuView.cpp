@@ -60,12 +60,12 @@ void MenuView::draw() {
 }
 
 void MenuView::cycle(int step) {
-    step = (selected + step) % buttons.size();
+    selected = (selected + step) % buttons.size();
     for (int i = 0; i < buttons.size(); i++) {  
         deselect(&buttons.at(i));
-        if (i == step)
-            select(&buttons.at(i));
     }
+    std::cout << buttons.size() << std::endl;
+    select(&buttons.at(selected));
 }
 
 void MenuView::select(sf::Text* text) {
@@ -88,7 +88,7 @@ void MenuView::resetPosition() {
         
         buttons.at(i).setPosition(
                 sf::Vector2f(windowWidth / 2 - width / 2,
-                topButtonY + (i * spacing) - height / 2 ));
+                topButtonY + (i * spacing) - height));
     }
 }
 

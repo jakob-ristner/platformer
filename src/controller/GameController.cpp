@@ -101,13 +101,21 @@ void GameController::enterMenu() {
     bool inMenu = true;
     while (inMenu) {
         while (view.poll(event)) {
-            if (event.key.code == sf::Keyboard::Escape) {
-                inMenu = false; // just closing
-                break;
-            } else if (event.key.code == sf::Keyboard::W) {
-                menu->cycle(-1);
-            } else if (event.key.code == sf::Keyboard::S) {
-                menu->cycle(1);
+            if (event.type == sf::Event::KeyPressed) {
+                switch (event.key.code) {
+                    case sf::Keyboard::Escape:
+                        inMenu = false;
+                        break;
+
+                    case sf::Keyboard::W:
+                        menu->cycle(-1);
+                        break;
+                    
+                    case sf::Keyboard::S:
+                        menu->cycle(1);
+                        break;
+
+                }
             }
         }
         updateView();
