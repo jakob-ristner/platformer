@@ -30,6 +30,7 @@ void GameController::init() {
     model = ModelInterface();
     player = model.getPlayer();
     playerHandler = PlayerInputHandler(model.getPlayer());
+    PlayerContactListener::addObserver(&playerHandler);
     initDynBody(player);
     player->getBody()->SetFixedRotation(true);
 
@@ -38,6 +39,7 @@ void GameController::init() {
 
     for (int i = 0; i < model.getPlatforms()->size(); i++) {
         initStatBody(&(model.getPlatforms()->at(i)));   
+        model.getPlatforms()->at(i).getBody()->SetUserData(&model.getPlatforms()->at(i));
     }
 
     view.setModel(&model);

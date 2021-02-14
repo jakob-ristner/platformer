@@ -49,3 +49,9 @@ void Body::setCollision(bool coll) {
         fix->SetSensor(!coll);
     }
 }
+
+std::string Body::getType() {
+    return type;
+}
+
+

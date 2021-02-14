@@ -108,3 +108,9 @@ void PlayerInputHandler::handleCharge(float dt) {
     }
     player->setCharge(charge);
 }
+
+void PlayerInputHandler::notifyCollide(Body* b1, Body* b2) {
+}
+
+void PlayerInputHandler::notifyUncollide(Body* b1, Body* b2) {
+}

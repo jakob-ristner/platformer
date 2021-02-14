@@ -8,5 +8,8 @@ class Platform: public Body {
         Platform(float w, float h, float x, float y);
         Platform();
         ~Platform();
+
+        void collideStart();
+        void collideEnd();
         
 };

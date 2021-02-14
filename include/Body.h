@@ -2,13 +2,16 @@
 #include "Box2D.h"
 #include "GameObject.h"
 
-class Body : public GameObject {
+class Body {
     public:
         b2Body* getBody();
         b2Shape* getShape();
         void setBody(b2Body*);
 
         void setCollision(bool coll);
+
+        virtual void collideStart() {};
+        virtual void collideEnd() {};
 
         float getX();
         float getY();
@@ -19,6 +22,9 @@ class Body : public GameObject {
         float getDensity();
         float getFriction();
 
+        std::string getType();
+
+
 
     protected:
         float width;
@@ -27,6 +33,8 @@ class Body : public GameObject {
         float friction;
         float startX;
         float startY;
+
+        std::string type;
 
         b2PolygonShape shape;
 

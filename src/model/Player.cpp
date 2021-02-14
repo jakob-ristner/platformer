@@ -50,3 +50,11 @@ void Player::unCollide() {
 bool Player::getContact() {
     return collisions > 0;
 }
+
+void Player::collideStart() {
+    collisions++;
+}
+
+void Player::collideEnd() {
+    collisions--;
+}

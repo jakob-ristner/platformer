@@ -15,3 +15,6 @@ Platform::Platform(float width, float height, float x, float y) {
 Platform::Platform() {}
 
 Platform::~Platform() {}
+
+void Platform::collideStart() {}
+void Platform::collideEnd() {}

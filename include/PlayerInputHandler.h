@@ -1,14 +1,18 @@
 #pragma once
 #include "Player.h"
+#include "CollisionObserver.h"
 #include <SFML/Graphics.hpp>
 
-class PlayerInputHandler {
+class PlayerInputHandler : public CollisionObserver {
     public:
         PlayerInputHandler(Player* player);
         PlayerInputHandler();
         ~PlayerInputHandler();
         void handleEvent(sf::Event event);
         void update(float dt);
+
+        void notifyCollide(Body* b1, Body* b2);
+        void notifyUncollide(Body* b1, Body* b2);
         
     private:
         void playerJump();

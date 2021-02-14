@@ -12,7 +12,7 @@ DEPS := $(OBJS:.o=.d)
 INC_DIRS := $(shell find $(SRC_DIRS) -type d)
 INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 
-CPPFLAGS ?= $(INC_FLAGS) -MMD -MP -g -I./include -I./lib
+CPPFLAGS ?= $(INC_FLAGS) -MMD -MP -g -I./include -I./lib -std=c++17
 LDFLAGS = -lsfml-graphics -lsfml-window -lsfml-system
 CC = g++
 CXX = g++

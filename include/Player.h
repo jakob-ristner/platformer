@@ -18,6 +18,9 @@ class Player: public Body {
         void collide();
         void unCollide();
 
+        void collideStart();
+        void collideEnd();
+
         bool onGround = false;
 
     private:
