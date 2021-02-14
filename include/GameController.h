@@ -25,6 +25,7 @@ class GameController {
         void handlePlayerFric(); 
 
         //Input
+        void enterMenu();
         void handleInput();
 
         bool running;

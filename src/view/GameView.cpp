@@ -9,9 +9,12 @@ GameView::GameView():
     bgFill.setSize(sf::Vector2f(windowWidth, windowHeight));
     bgFill.setFillColor(sf::Color(29, 32, 38));
 
+    menu = MenuView(&window, sf::Vector2f(windowWidth, windowHeight));
+
 }
 
 void GameView::initPlayer() {
+
     window.setKeyRepeatEnabled(false);
     playerShape = sf::RectangleShape(getSize(model->getPlayer()));
     playerShape.setFillColor(sf::Color(224, 108, 117));
@@ -45,6 +48,9 @@ void GameView::draw() {
     }
 
     drawPlatforms();
+}
+
+void GameView::display() {
     window.display();
 }
 
@@ -162,6 +168,11 @@ void GameView::updateChargeBar() {
     int cw = chargeBarWidth;
     int fillWidth = std::min(playerCharge, cw);
     chargeBarFill.setSize(sf::Vector2f(fillWidth, chargeBarHeight));
+}
+
+MenuView* GameView::initMenu() {
+    menu.init();
+    return &menu;
 }
 
 

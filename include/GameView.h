@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "ModelInterface.h"
+#include "MenuView.h"
 
 
 class GameView {
@@ -16,7 +17,10 @@ class GameView {
         void updatePlatforms();
         void initPlayer();
 
+        MenuView* initMenu();
+
         bool poll(sf::Event &event);
+        void display();
     private:
         static const int windowWidth = 1920;
         static const int windowHeight = 1080;
@@ -46,6 +50,8 @@ class GameView {
         sf::Vector2f getSize(Body* body);
         sf::Vector2f getOrigin(Body* body);
         sf::Vector2f getPos(Body* body);
+
+        MenuView menu;
 
         void draw(); 
 

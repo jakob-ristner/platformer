@@ -23,6 +23,7 @@ void GameController::run() {
         handleInput();;
         world.Step(dt, velocityiIt, posIt);
         updateView();
+        view.display();
     }
 }
 
@@ -57,6 +58,9 @@ void GameController::handleInput() {
         if (event.type == sf::Event::Closed || event.key.code == sf::Keyboard::Q)
             running = false; // just closing
 
+        if (event.key.code  == sf::Keyboard::P)
+            enterMenu();
+
         playerHandler.handleEvent(event); // player input
     }
 }
@@ -90,6 +94,26 @@ void GameController::initStatBody(Body* body) {
 
     body->setBody(b2body);
     body->getBody()->CreateFixture(&fixDef);
+}
+
+void GameController::enterMenu() {
+    MenuView* menu = view.initMenu();
+    bool inMenu = true;
+    while (inMenu) {
+        while (view.poll(event)) {
+            if (event.key.code == sf::Keyboard::Escape) {
+                inMenu = false; // just closing
+                break;
+            } else if (event.key.code == sf::Keyboard::W) {
+                menu->cycle(-1);
+            } else if (event.key.code == sf::Keyboard::S) {
+                menu->cycle(1);
+            }
+        }
+        updateView();
+        menu->draw();
+        view.display();
+    }      
 }
 
 //TODO move to playerctl
