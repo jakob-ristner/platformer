@@ -9,6 +9,7 @@ class MenuView {
         ~MenuView();
         void init();
         void draw();
+        int press();
 
         void cycle(int step);
 

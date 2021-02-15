@@ -7,7 +7,7 @@ MenuView::MenuView(sf::RenderWindow* window, sf::Vector2f windowSize) {
     font.loadFromFile("./font.ttf");
 
     selectedColor = sf::Color(255, 255, 255);
-    normal = sf::Color(50, 50, 50);
+    normal = sf::Color(100, 100, 100);
 
     button1 = sf::Text("Quit", font, normalFontSize);
     button2 = sf::Text("Something", font, normalFontSize);
@@ -23,8 +23,6 @@ MenuView::MenuView(sf::RenderWindow* window, sf::Vector2f windowSize) {
 
     windowWidth = windowSize.x;
     windowHeight = windowSize.y;
-
-    std::cout << "created menuviwe" <<  std::endl;
 
     int tWidth;
     for (int i = 0; i < buttons.size(); i++) {
@@ -64,7 +62,6 @@ void MenuView::cycle(int step) {
     for (int i = 0; i < buttons.size(); i++) {  
         deselect(&buttons.at(i));
     }
-    std::cout << buttons.size() << std::endl;
     select(&buttons.at(selected));
 }
 
@@ -91,4 +88,10 @@ void MenuView::resetPosition() {
                 topButtonY + (i * spacing) - height));
     }
 }
+
+int MenuView::press() {
+    return selected;
+}
+
+
 

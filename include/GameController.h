@@ -17,7 +17,7 @@ class GameController {
 
         void run();
 
-    private: //Player should be moved to own controller
+    private: 
         void init();
         void initDynBody(Body* body);
         void initStatBody(Body* body);
@@ -27,8 +27,10 @@ class GameController {
         //Input
         void enterMenu();
         void handleInput();
+        void pressMenuButton(MenuView* menu);
 
         bool running;
+        bool inMenu;
         GameView view;
         
         Player* player;

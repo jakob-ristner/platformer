@@ -96,9 +96,10 @@ void GameController::initStatBody(Body* body) {
     body->getBody()->CreateFixture(&fixDef);
 }
 
+//TODO move to menucontroller
 void GameController::enterMenu() {
     MenuView* menu = view.initMenu();
-    bool inMenu = true;
+    inMenu = true;
     while (inMenu) {
         while (view.poll(event)) {
             if (event.type == sf::Event::KeyPressed) {
@@ -115,6 +116,10 @@ void GameController::enterMenu() {
                         menu->cycle(1);
                         break;
 
+                    case sf::Keyboard::Enter:
+                        pressMenuButton(menu);
+                        break;
+
                 }
             }
         }
@@ -124,8 +129,20 @@ void GameController::enterMenu() {
     }      
 }
 
-//TODO move to playerctl
 
+void GameController::pressMenuButton(MenuView* menu) {
+    // 0 : quit
+    // 1 : nothing
+    // 2 : nothing
+    
+    switch(menu->press()) { 
+        case 0:
+            running = false;
+            inMenu = false;
+            break;
+    }
+
+}
 
 
 
