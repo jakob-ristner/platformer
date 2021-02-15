@@ -19,6 +19,7 @@ class MenuView {
         sf::Text button3;
         sf::RectangleShape background;
         sf::Font font;
+        std::string fontPath = "resources/fonts/pixel.ttf";
 
         sf::Color selectedColor;
         sf::Color normal;
@@ -33,7 +34,6 @@ class MenuView {
         
         int topButtonY = 400;
         int spacing = 100;
-
 
         int windowWidth;
         int windowHeight;

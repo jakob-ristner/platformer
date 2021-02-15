@@ -49,6 +49,7 @@ class GameController {
         bool playerCol = false;
         PlayerContactListener clistener;
 
+
         static const int velocityiIt = 6;
         static const int posIt = 2;
         static const int g = 30;

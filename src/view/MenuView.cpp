@@ -4,7 +4,7 @@ MenuView::MenuView(sf::RenderWindow* window, sf::Vector2f windowSize) {
     this->window = window;
 
     font = sf::Font();
-    font.loadFromFile("./font.ttf");
+    font.loadFromFile(fontPath);
 
     selectedColor = sf::Color(255, 255, 255);
     normal = sf::Color(100, 100, 100);
@@ -27,8 +27,10 @@ MenuView::MenuView(sf::RenderWindow* window, sf::Vector2f windowSize) {
     int tWidth;
     for (int i = 0; i < buttons.size(); i++) {
         tWidth = buttons.at(i).getLocalBounds().width / 2;
-        buttons.at(i).setPosition(sf::Vector2f(windowSize.x / 2 - tWidth, 300 + 100 * i));
+        buttons.at(i).setPosition(
+                sf::Vector2f(windowSize.x / 2 - tWidth, 300 + 100 * i));
         buttons.at(i).setFillColor(sf::Color::White);
+
     }
 
     cycle(0);
@@ -78,6 +80,16 @@ void MenuView::deselect(sf::Text* text) {
 void MenuView::resetPosition() {
     int width;
     int height;
+    int totalheight = 0;
+
+    for (auto button : buttons) {
+       button.setFont(font);
+       totalheight += spacing;
+       totalheight += button.getLocalBounds().height;
+    }
+    totalheight -= spacing;
+    topButtonY = (windowHeight / 2) - (totalheight / 2);
+    
     for (int i = 0; i < buttons.size(); i++) {
         buttons.at(i).setFont(font);
         width = buttons.at(i).getGlobalBounds().width;
