@@ -19,7 +19,6 @@ void GameView::initPlayer() {
     playerShape = sf::RectangleShape(getSize(model->getPlayer()));
     playerShape.setFillColor(sf::Color(224, 108, 117));
     playerShape.setOrigin(getOrigin(model->getPlayer()));
-    drawables.push_back(&playerShape);
 
     initChargeBar();
 }
@@ -36,18 +35,15 @@ void GameView::update() {
 void GameView::draw() {
     window.draw(bgFill);
 
-    for (auto element : drawables) {
-        window.draw(*element);
-    }
-
     //testing contact listener
     if (model->getPlayer()->getContact()) {
         playerShape.setFillColor(sf::Color(97, 175, 239));
     } else {
         playerShape.setFillColor(sf::Color(224, 108, 117));
     }
-
+    drawPlayer();
     drawPlatforms();
+    drawCastBar();
 }
 
 void GameView::display() {
@@ -149,9 +145,6 @@ void GameView::initChargeBar() {
     chargeBarFill.setPosition(sf::Vector2f((int) (windowWidth - chargeBarWidth) / 2, chargeBarY));
     chargeBarFill.setFillColor(sf::Color(8, 195, 121));
 
-    drawables.push_back(&chargeBarBorder);
-    drawables.push_back(&chargeBarBackground);
-    drawables.push_back(&chargeBarFill);
 }
 
 void GameView::updateChargeBar() {
@@ -175,6 +168,15 @@ MenuView* GameView::initMenu() {
     return &menu;
 }
 
+void GameView::drawPlayer() {
+    window.draw(playerShape);
+}
+
+void GameView::drawCastBar() {
+    window.draw(chargeBarBorder);
+    window.draw(chargeBarBackground);
+    window.draw(chargeBarFill);
+}
 
 
 

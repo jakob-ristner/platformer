@@ -29,6 +29,8 @@ class PlayerInputHandler : public CollisionObserver {
 
         b2Vec2 left;
         b2Vec2 right;
+        
+        float fricConstant = 60;
 
         
 };

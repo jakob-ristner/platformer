@@ -103,6 +103,7 @@ void GameController::enterMenu() {
     inMenu = true;
     while (inMenu) {
         while (view.poll(event)) {
+            playerHandler.handleEvent(event);
             if (event.type == sf::Event::KeyPressed) {
                 switch (event.key.code) {
                     case sf::Keyboard::Escape:

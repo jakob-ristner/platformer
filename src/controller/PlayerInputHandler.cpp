@@ -7,8 +7,6 @@
 PlayerInputHandler::PlayerInputHandler(Player* player) {
     this->player = player;
     jumpCounter = 1;
-    left = b2Vec2(-player->getAcc(), 0);
-    right = b2Vec2(player->getAcc(), 0);
 
     isMovingRight = false;
     isMovingLeft = false;
@@ -65,7 +63,12 @@ void PlayerInputHandler::handleEvent(sf::Event event) {
 
 void PlayerInputHandler::update(float dt) {
     jumpCounter += dt;
+
+    left = b2Vec2(-player->getAcc() * dt * fricConstant, 0);
+    right = b2Vec2(player->getAcc() * dt * fricConstant, 0);
+
     movePlayer();
+
     if (player->getContact() && player->getBody()->GetLinearVelocity().y == 0) {
         player->onGround = true;
     } else { 
@@ -73,9 +76,9 @@ void PlayerInputHandler::update(float dt) {
     }
     if (player->getContact()) {
         if (player->getBody()->GetLinearVelocity().x < 0) {
-            player->getBody()->ApplyLinearImpulseToCenter(b2Vec2(2, 0), true);
+            player->getBody()->ApplyLinearImpulseToCenter(b2Vec2(2 * dt * fricConstant , 0), true);
         } else if (player->getBody()->GetLinearVelocity().x > 0) {
-            player->getBody()->ApplyLinearImpulseToCenter(b2Vec2(-2, 0), true);
+            player->getBody()->ApplyLinearImpulseToCenter(b2Vec2(-2 * dt * fricConstant, 0), true);
         }
     }
     handleCharge(dt);
@@ -85,7 +88,8 @@ void PlayerInputHandler::playerJump() {
     float playerVelx = player->getBody()->GetLinearVelocity().x;
     float playerVely = player->getBody()->GetLinearVelocity().y;
     if (player->onGround) {
-        player->getBody()->SetLinearVelocity(b2Vec2(playerVelx, -player->getJump()));
+        player->getBody()->SetLinearVelocity(
+                b2Vec2(playerVelx, -player->getJump()));
         jumpCounter = 0;
     }
 }
@@ -114,3 +118,4 @@ void PlayerInputHandler::notifyCollide(Body* b1, Body* b2) {
 
 void PlayerInputHandler::notifyUncollide(Body* b1, Body* b2) {
 }
+

@@ -55,12 +55,12 @@ class GameView {
 
         void draw(); 
 
-        std::vector<sf::Drawable*> drawables;
-        
+
 
         //TODO move below to playerview
         void drawPlayer();
         void updatePlayerPos();
+        void drawCastBar(); 
         sf::RectangleShape playerShape;
 
         //TODO same here
