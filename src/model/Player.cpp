@@ -58,3 +58,12 @@ void Player::collideStart() {
 void Player::collideEnd() {
     collisions--;
 }
+
+float Player::getDashForce() {
+   return dashForce; 
+}
+
+float Player::getDashCooldown() {
+    return dashCooldown;
+}
+

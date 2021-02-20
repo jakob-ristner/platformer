@@ -21,6 +21,9 @@ class Player: public Body {
         void collideStart();
         void collideEnd();
 
+        float getDashForce();
+        float getDashCooldown();
+
         bool onGround = false;
 
     private:
@@ -31,4 +34,7 @@ class Player: public Body {
         bool contact = false;
         int collisions = 0;
 
+        float dashForce = 300;
+        float dashCooldown = 2;
+            
 };
