@@ -19,8 +19,8 @@ void GameController::run() {
     init();
     while (running) {
         dt = clock.restart().asMilliseconds() / 1000.0f;
+        handleInput();
         playerHandler.update(dt);
-        handleInput();;
         world.Step(dt, velocityiIt, posIt);
         updateView();
         view.display();
@@ -36,6 +36,7 @@ void GameController::init() {
     player->getBody()->SetFixedRotation(true);
 
     player->getBody()->SetUserData(player);
+    
 
 
     for (int i = 0; i < model.getPlatforms()->size(); i++) {
@@ -50,7 +51,7 @@ void GameController::init() {
     world.SetContactListener(&clistener);
 
 }
-
+                                                                            
 void GameController::handleInput() {
     // can be used to call seperate methods instead
     while (view.poll(event)) {
@@ -85,7 +86,7 @@ void GameController::initStatBody(Body* body) {
     b2BodyDef bodyDef;
     bodyDef.position.Set(body->getStartX(), body->getStartY());
     bodyDef.type = b2_staticBody;
-    b2Body* b2body = world.CreateBody(&bodyDef);
+   b2Body* b2body = world.CreateBody(&bodyDef);
 
     b2FixtureDef fixDef;
 
@@ -123,6 +124,7 @@ void GameController::enterMenu() {
                 }
             }
         }
+        dt = clock.restart().asMilliseconds() / 1000.0f;
         updateView();
         menu->draw();
         view.display();

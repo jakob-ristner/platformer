@@ -3,7 +3,7 @@
 
 GameView::GameView():
     window(sf::VideoMode(windowWidth, windowHeight), "Platformer",
-           sf::Style::Close | sf::Style::Fullscreen, settings) 
+           sf::Style::Close | sf::Style::Titlebar, settings) 
 {
     window.setFramerateLimit(60);
     bgFill.setSize(sf::Vector2f(windowWidth, windowHeight));

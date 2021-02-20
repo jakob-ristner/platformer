@@ -22,8 +22,8 @@ class GameView {
         bool poll(sf::Event &event);
         void display();
     private:
-        static const int windowWidth = 2560;
-        static const int windowHeight = 1440;
+        static const int windowWidth = 1920;
+        static const int windowHeight = 1080;
         static const int worldScale = 25;
 
         //charge bar TODO could be moved to playerview
