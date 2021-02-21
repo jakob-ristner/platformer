@@ -22,6 +22,7 @@ void GameController::run() {
         handleInput();
         playerHandler.update(dt);
         world.Step(dt, velocityiIt, posIt);
+        updateCooldowns();
         updateView();
         view.display();
     }
@@ -44,7 +45,11 @@ void GameController::init() {
         model.getPlatforms()->at(i).getBody()->SetUserData(&model.getPlatforms()->at(i));
     }
 
+    playerHandler.setCds(&coolDowns);
+
     view.setModel(&model);
+    view.setCds(&coolDowns);
+
     view.initPlayer();
     view.updatePlatforms();
 
@@ -59,8 +64,9 @@ void GameController::handleInput() {
         if (event.type == sf::Event::Closed || event.key.code == sf::Keyboard::Q)
             running = false; // just closing
 
-        if (event.key.code  == sf::Keyboard::P)
+        if (event.key.code  == sf::Keyboard::P) {
             enterMenu();
+        }
 
         playerHandler.handleEvent(event); // player input
     }
@@ -145,6 +151,24 @@ void GameController::pressMenuButton(MenuView* menu) {
             break;
     }
 
+}
+
+void GameController::updateCooldowns() {
+    bool finished = false;
+    int toPop;
+    while (!finished) {
+        finished = true;
+        for (int i = 0; i < coolDowns.size(); i++) {
+            if (!*std::get<2>(coolDowns.at(i))) {
+                toPop = i;
+                finished = false;
+                break;
+            }
+        }
+        if (!finished) {
+            coolDowns.erase(coolDowns.begin() + toPop);
+        }
+    }
 }
 
 

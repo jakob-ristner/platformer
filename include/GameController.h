@@ -37,6 +37,9 @@ class GameController {
         void playerJump();
         const float playerGroundForce = 2;
 
+        std::vector<std::tuple<std::string, float*, bool*>> coolDowns;
+        void updateCooldowns();
+
         ModelInterface model;
        
         sf::Clock clock;
@@ -48,6 +51,7 @@ class GameController {
         void endPlayerContact();
         bool playerCol = false;
         PlayerContactListener clistener;
+
 
 
         static const int velocityiIt = 6;

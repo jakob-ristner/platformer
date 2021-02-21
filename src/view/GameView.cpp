@@ -1,5 +1,6 @@
 #include "GameView.h"
 #include "Platform.h"
+#include "CoolDownView.h"
 
 GameView::GameView():
     window(sf::VideoMode(windowWidth, windowHeight), "Platformer",
@@ -10,6 +11,7 @@ GameView::GameView():
     bgFill.setFillColor(sf::Color(29, 32, 38));
 
     menu = MenuView(&window, sf::Vector2f(windowWidth, windowHeight));
+    cdView = CoolDownView(&window);
 
 }
 
@@ -44,6 +46,7 @@ void GameView::draw() {
     drawPlayer();
     drawPlatforms();
     drawCastBar();
+    cdView.draw();
 }
 
 void GameView::display() {
@@ -178,6 +181,9 @@ void GameView::drawCastBar() {
     window.draw(chargeBarFill);
 }
 
+void GameView::setCds(std::vector<std::tuple<std::string, float*, bool*>>* coolDowns) {
+    cdView.set(coolDowns);
+}
 
 
 

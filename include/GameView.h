@@ -4,6 +4,7 @@
 #include <iostream>
 #include "ModelInterface.h"
 #include "MenuView.h"
+#include "CoolDownView.h"
 
 
 class GameView {
@@ -21,6 +22,8 @@ class GameView {
 
         bool poll(sf::Event &event);
         void display();
+
+        void setCds(std::vector<std::tuple<std::string, float*, bool*>>* coolDowns);
     private:
         static const int windowWidth = 1920;
         static const int windowHeight = 1080;
@@ -54,6 +57,10 @@ class GameView {
         MenuView menu;
 
         void draw(); 
+
+        // Add to gui view?
+        CoolDownView cdView;
+
 
 
 

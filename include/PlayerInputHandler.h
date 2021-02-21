@@ -15,6 +15,8 @@ class PlayerInputHandler : public CollisionObserver {
         void notifyUncollide(Body* b1, Body* b2);
 
         void handleKeyRelease(sf::Event event);
+        void setCds(std::vector<std::tuple<std::string, float*, bool*>>* coolDowns);
+
         
     private:
 
@@ -35,14 +37,15 @@ class PlayerInputHandler : public CollisionObserver {
         
         float dtConstant = 60;
 
+        std::vector<std::tuple<std::string, float*, bool*>>* coolDowns;
 
         // Dashing
         void dash(float dt);
-        float dashInterval = 0.5;
-        float dashCooldown = 0.8;
-        float dashDur = 0.2;
-        float dashCooldowncounter = 0;
-        int postDashSpeed = 5;
+        float dashInterval = 0.2;
+        float dashCooldown = 2;
+        float dashDur = 0.25;
+        float dashCooldowncounter = dashCooldown;
+        int postDashSpeed = 8;
         bool dashRightPressed = false;
         bool justDashed = false;
         bool doDash = false;

@@ -100,8 +100,8 @@ void PlayerInputHandler::update(float dt) {
     }
 
     if (justDashed) {
-        dashCooldowncounter += dt;
-        if (dashCooldowncounter >= dashDur && dashing) {
+        dashCooldowncounter -= dt;
+        if (dashCooldowncounter < (dashCooldown - dashDur) && dashing) {
             dashing = false;
             float ys = player->getBody()->GetLinearVelocity().y;
             if (player->getBody()->GetLinearVelocity().x < 0) {
@@ -111,9 +111,9 @@ void PlayerInputHandler::update(float dt) {
             }
         }
         
-        if (dashCooldowncounter >= dashCooldown) {
+        if (dashCooldowncounter < 0) {
             justDashed = false;
-            dashCooldowncounter = 0;
+            dashCooldowncounter = dashCooldown;
         }
     } 
 
@@ -179,6 +179,7 @@ void PlayerInputHandler::notifyUncollide(Body* b1, Body* b2) {
 }
 
 void PlayerInputHandler::dash(float dt) {
+    coolDowns->push_back(std::make_tuple("dash", &dashCooldowncounter, &justDashed));
     b2Vec2 dashVec = b2Vec2(-player->getDashForce() * dt * dtConstant, 0);
     if (dashRightPressed) {
         dashRightPressed = false;
@@ -189,5 +190,9 @@ void PlayerInputHandler::dash(float dt) {
 
 
     player->getBody()->ApplyLinearImpulseToCenter(dashVec, true);
+}
+
+void PlayerInputHandler::setCds(std::vector<std::tuple<std::string, float*, bool*>>* coolDowns) {
+    this->coolDowns = coolDowns;
 }
 
