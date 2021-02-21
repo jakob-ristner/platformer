@@ -25,10 +25,9 @@ void CoolDownView::draw() {
     for (int i = 0; i  < coolDowns->size(); i++) {
         std::tuple<std::string, float*, bool*> cd = (*coolDowns).at(i);
         cTime = *std::get<1>(cd);
-        cText = std::get<0>(cd).append(" : ").append(std::to_string(cTime));
+        cText = std::get<0>(cd).append(" : ").append(std::to_string(cTime).substr(0, 3));
         text.setString(cText);
         text.setPosition(sf::Vector2f(xPadding, yPadding + i * spacing));
-
         window->draw(text);
     }
 

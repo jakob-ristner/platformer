@@ -154,21 +154,13 @@ void GameController::pressMenuButton(MenuView* menu) {
 }
 
 void GameController::updateCooldowns() {
-    bool finished = false;
-    int toPop;
-    while (!finished) {
-        finished = true;
-        for (int i = 0; i < coolDowns.size(); i++) {
-            if (!*std::get<2>(coolDowns.at(i))) {
-                toPop = i;
-                finished = false;
-                break;
-            }
-        }
-        if (!finished) {
-            coolDowns.erase(coolDowns.begin() + toPop);
+    std::vector<std::tuple<std::string, float*, bool*>> keep;
+    for (auto cd : coolDowns) {
+        if (*std::get<2>(cd)) {
+            keep.push_back(cd);
         }
     }
+    coolDowns = keep;
 }
 
 
